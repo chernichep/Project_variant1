@@ -1,0 +1,205 @@
+﻿<Window x:Class="Project.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:Project.View"
+        mc:Ignorable="d"
+        Title="Главное окно" 
+        Height="450" 
+        Width="800"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="16"
+        TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        WindowStartupLocation="CenterScreen"
+        Icon="/View/2.png">
+    <Window.Resources>
+        <Style x:Key="StyleTwo" TargetType="DataGrid">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="ColumnHeaderHeight" Value="40"/>
+            <Setter Property="ColumnWidth" Value="*"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="BorderBrush" Value="WhiteSmoke"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
+        </Style>
+        <Style x:Key="StyleThree" TargetType="TabItem">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="5,1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#EFEFEF">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <mah:MetroTabControl 
+            
+            FontFamily="{DynamicResource MaterialDesignFont}"
+            HorizontalContentAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="#E8E8E8"
+            Margin="10" TabStripPlacement="Left" SelectedItem="{Binding SelectedTab}" Name="TabControl1" Grid.Row="0">
+            <TabItem 
+            Foreground="Black"
+                Style="{DynamicResource StyleThree}" Name="BankTab">
+
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <TabItem.Header>
+                    <TextBlock Text="Банки"/>
+                </TabItem.Header>
+                <DataGrid Margin="10"   
+                BorderThickness="1"
+                x:Name="BankDataGrid"
+                IsReadOnly="True"
+                AutoGenerateColumns="False"
+                ItemsSource="{Binding Banks, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem ="{Binding SelectedBank}"
+                    SelectionUnit="FullRow"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=NameFull}" Width="350" x:Name="NameFull" Header="Полное имя"/>
+                        <DataGridTextColumn Binding="{Binding Path=NameShort}" x:Name="NameShort" Header="Короткое имя"/>
+                        <DataGridTextColumn Binding="{Binding Path=Inn}" x:Name="Inn" Header="Инн"/>
+                        <DataGridTextColumn Binding="{Binding Path=Bik}" x:Name="Bik" Header="Бик"/>
+                        <DataGridTextColumn Binding="{Binding Path=KorAccount}" x:Name="KorAccount" Header="Корсчет"/>
+                        <DataGridTextColumn Binding="{Binding Path=AccounNumber}" x:Name="AccountNumber" Header="Номер банк.счета"/>
+                        <DataGridTextColumn Binding="{Binding Path=City}" x:Name="City" Header="Город"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </TabItem>
+            <TabItem  
+                Foreground="Black"
+                Style="{DynamicResource StyleThree}"
+                Name="AccountTypeTab">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <TabItem.Header>
+                    <TextBlock Text="Типы"/>
+                </TabItem.Header>
+                <DataGrid Margin="10"  
+                    BorderThickness="1"
+                    IsReadOnly="True"
+                    AutoGenerateColumns="False"
+                    x:Name="DataGridAccountTypes" SelectedItem="{Binding SelectedType}" ItemsSource="{Binding AccountTypes,UpdateSourceTrigger=PropertyChanged}"
+                    SelectionUnit="FullRow"
+                    SelectionMode="Single">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Type}" Width="350" x:Name="Type" Header="Тип"/>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </TabItem>
+            <TabItem 
+                Foreground="Black"
+                Name="AggrementTab" Style="{DynamicResource StyleThree}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <TabItem.Header>
+                    <TextBlock Text="Договора"/>
+                </TabItem.Header>
+                <DataGrid   
+                    Margin="10"
+                    BorderThickness="1"
+                    SelectedItem="{Binding SelectedAggrement}"
+                     Name="AggrementDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Aggrements}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=Number}" x:Name="Number" Header="Номер"/>
+                        <DataGridTextColumn Binding="{Binding Path=DateOpen}" x:Name="DataOpen" Header="Дата заключения"/>
+                        <DataGridTextColumn Binding="{Binding Path=DataClose}" x:Name="DataClose" Header="Дата закрытия"/>
+                        <DataGridTextColumn Binding="{Binding Path=Notes}" x:Name="Notes" Header="Заметки"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem 
+                    Name="AccountTab"
+                Foreground="Black"
+                Style="{DynamicResource StyleThree}">
+                <TabItem.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Редактировать"/>
+                        <MenuItem Header="Удалить" Command="{Binding DeleteItem}"/>
+                    </ContextMenu>
+                </TabItem.ContextMenu>
+                <TabItem.Header>
+                    <TextBlock Text="Счета"/>
+                </TabItem.Header>
+                <DataGrid
+                    BorderThickness="1"
+                    Margin="10"
+                    Name="AccountGrid"
+                    SelectedItem="{Binding SelectedAccount}"
+                    ItemsSource="{Binding Accounts, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=AccountAccountType.Type}" x:Name="TypeID" Header="Тип счета"/>
+                        <DataGridTextColumn Binding="{Binding Path=AccountBank.NameShort}" x:Name="BankID" Header="Банк"/>
+                        <DataGridTextColumn Binding="{Binding Path=AccountAggrement.Number}" x:Name="AggrementID" Header="Договор"/>
+                        <DataGridTextColumn Binding="{Binding Path=AccountNumber}" x:Name="AccountNumber2" Header="Номер ивестиционного счета"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <StackPanel/>
+
+        </mah:MetroTabControl>
+        <Button 
+            Command="{Binding AddItem}"
+            Height="30"
+            Background="#EFEFF1"
+            Foreground="Black"
+            Name="AddButton" Content="Добавить" 
+            HorizontalAlignment="Right" 
+            Margin="0,0,320,0" Grid.Row="1"
+            VerticalAlignment="Center" 
+            Width="125" Click="AddButton_Click"/>
+        <Button 
+            Height="30"
+            Background="#EFEFF1"
+            Foreground="Black"
+            Command="{Binding DeleteItem}"
+            Name="DeleteButton" Content="Удалить" 
+            HorizontalAlignment="Right" Margin="0,0,185,0"
+            Grid.Row="1" VerticalAlignment="Center" 
+            Width="125" Click="DeleteButton_Click"/>
+        <Button 
+            Command="{Binding EditITem}"
+            Height="30"
+            Background="#EFEFF1"
+            Foreground="Black"
+            Name="EditButton"
+            Content="Изменить"
+            HorizontalAlignment="Right" 
+            Margin="0,0,50,0" Grid.Row="1" 
+            VerticalAlignment="Center"
+            Width="125" Click="EditButton_Click" RenderTransformOrigin="0.446,-0.22"/>
+       
+    </Grid>
+</Window>

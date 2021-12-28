@@ -1,0 +1,64 @@
+﻿<Window x:Class="Project.View.Editing.EditAccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.Editing"
+        mc:Ignorable="d"
+        Title="Изменение счета" 
+        Height="400" 
+        Width="300"
+        MaxWidth="500"
+        Name="EditAccountWindow"
+        MaxHeight="450"
+        WindowStartupLocation="CenterScreen" Icon="/View/Editing/2.png">
+    <Grid Background="#EFEFEF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="181*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Width="200" Grid.ColumnSpan="3" Margin="50,0,0,0">
+            <TextBlock Text="Тип счета"/>
+            <ComboBox 
+                ItemsSource="{Binding AllAccountTypes,Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource ComboBox}"
+                SelectedItem="{Binding AccountAccountType}"
+                DisplayMemberPath="Type"/>
+
+            <TextBlock Text="Банк"/>
+            <ComboBox 
+                ItemsSource="{Binding AllBanks,Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding AccountBank}"
+                Style="{StaticResource ComboBox}"
+               DisplayMemberPath="NameShort"/>
+            <TextBlock Text="Договор"/>
+            <ComboBox 
+                 x:Name="AccountAggrement"
+                ItemsSource="{Binding AllAggrements, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding AccountAggrement}"
+                DisplayMemberPath="Number"
+                Style="{StaticResource ComboBox}"/>
+            <TextBlock  Text="Номер инвестиционного счета"/>
+            <TextBox Text="{Binding AccountNumber2}" 
+                Style="{StaticResource TextBox}"/>
+            <Button 
+                Margin="0,10,0,0"
+                Content="Сохранить изменения"
+                Height="30"
+                Background="#EFEFF1"
+                Foreground="Black"
+                Command="{Binding EditAccount}"
+                CommandParameter="{Binding ElementName=EditAccountWindow}"/>
+        </StackPanel>
+        <Border Background="#E8E8E8" Grid.ColumnSpan="3" Margin="0,334,0,0" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

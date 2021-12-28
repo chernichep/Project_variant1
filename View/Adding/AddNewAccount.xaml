@@ -1,0 +1,58 @@
+﻿<Window x:Class="Project.View.Adding.AddNewAccount"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.Adding" xmlns:viewmodel="clr-namespace:Project.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AccountViewModel}"
+        mc:Ignorable="d"
+        Title="Добавление нового счета" 
+        Height="308" 
+        Width="300"
+        MaxWidth="500"
+        MaxHeight="450"
+        Name="AddNewAccountWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#EFEFEF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Width="200" Margin="50,0,0,0">
+            <TextBlock Text="Тип счета"/>
+            <ComboBox Style="{StaticResource ComboBox}" x:Name="AccountTypes" 
+                      ItemsSource="{Binding AllAccountTypes, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Type"
+                      SelectedItem="{Binding AccountAccountType}"/>
+            <TextBlock Text="Банк"/>
+            <ComboBox Style="{StaticResource ComboBox}" x:Name="AccountBank" 
+                      ItemsSource="{Binding AllBanks, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="NameShort"
+                      SelectedItem="{Binding AccountBank}"/>
+            <TextBlock Text="Договор"/>
+            <ComboBox Style="{StaticResource ComboBox}" x:Name="AccountAggrement" 
+                      ItemsSource="{Binding AllAggrements, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Number"
+                      SelectedItem="{Binding AccountAggrement}"/>
+            <TextBlock Text="Номер инвестиционного счета"/>
+            <TextBox Style="{StaticResource TextBox}" x:Name="AccountNumber" 
+                     Text="{Binding AccountNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button 
+                Margin="0,10,0,0"
+                Content="Добавить"
+                Height="30"
+                Background="#EFEFF1"
+                Foreground="Black"
+                Command="{Binding AddNewAccount}"
+                CommandParameter="{Binding ElementName=AddNewAccountWindow}"/>
+        </StackPanel>
+        <Border Background="#E8E8E8" Grid.ColumnSpan="2" Margin="0,242,0,0" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

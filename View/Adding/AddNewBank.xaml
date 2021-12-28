@@ -1,0 +1,52 @@
+﻿<Window x:Class="Project.View.Adding.AddNewBank"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.Adding" xmlns:viewmodel="clr-namespace:Project.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:BankViewModel}"
+        Name="AddNewBankWindow"
+        mc:Ignorable="d"
+        Title="Добавление нового банка" 
+        Height="400" 
+        Width="300"
+        MaxWidth="500"
+        MaxHeight="450"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#EFEFEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="200">
+            <TextBlock  Text="Полное имя"/>
+            <TextBox Style="{StaticResource TextBox}" x:Name="NameFull" Text="{Binding NameFull, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Сокращенное имя"/>
+            <TextBox  Style="{StaticResource TextBox}" x:Name="NameShort" Text="{Binding NameShort}"/>
+            <TextBlock Text="ИНН"/>
+            <TextBox Style="{StaticResource TextBox}"  x:Name="Inn" Text="{Binding Inn}"/>
+            <TextBlock Text="БИК"/>
+            <TextBox Style="{StaticResource TextBox}"  x:Name="Bik" Text="{Binding Bik}"/>
+            <TextBlock Text="Номер корсчета"/>
+            <TextBox Style="{StaticResource TextBox}"  x:Name="KorAccount" Text="{Binding KorAccount}"/>
+            <TextBlock Text="Номер банковского счета"/>
+            <TextBox  Style="{StaticResource TextBox}"  x:Name="AccounNumber" Text="{Binding AccounNumber}"/>
+            <TextBlock Text="Город"/>
+            <TextBox Style="{StaticResource TextBox}"  x:Name="City" Text="{Binding City}"/>
+            <Button 
+                x:Name="AddNewBankButton"
+                Margin="0,10,0,0"
+                Content="Добавить"
+                Height="30"
+                Background="#EFEFF1"
+                Foreground="Black"
+                MouseEnter="AddNewBankButton_MouseEnter"
+                Command="{Binding AddNewBank}"
+                CommandParameter="{Binding ElementName=AddNewBankWindow}"/>
+        </StackPanel>
+        <Border Background="#E8E8E8" Grid.Row="1"/>
+    </Grid>
+</Window>

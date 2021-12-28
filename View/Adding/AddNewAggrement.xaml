@@ -1,0 +1,44 @@
+﻿<Window x:Class="Project.View.Adding.AddNewAggrement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project.View.Adding"
+        mc:Ignorable="d"
+        Title="Добавление нового договора" 
+        Height="400" 
+        Width="300"
+        MaxWidth="500"
+        MaxHeight="450"
+        Name="AddNewAggrementWindow"
+        WindowStartupLocation="CenterScreen">
+    <Grid Background="#EFEFEF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" 
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                    Width="200">
+            <TextBlock Text="Номер"/>
+            <TextBox Style="{StaticResource TextBox}" x:Name="Number" Text="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Дата заключения договора"/>
+            <DatePicker Style="{StaticResource DatePicker}" x:Name="DateOpen" Text="{Binding DateOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Дата закрытия договора"/>
+            <DatePicker Style="{StaticResource DatePicker}" x:Name="DataClose" Text="{Binding DataClose, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock  Text="Пояснения" />
+            <TextBox Style="{StaticResource TextBox}" x:Name="Notes"  Text ="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="60"/>
+            <Button 
+                Margin="0,10,0,0"
+                Content="Добавить"
+                Command="{Binding AddNewAggrement}"
+                CommandParameter="{Binding ElementName=AddNewAggrementWindow}"
+                          Height="30"
+            Background="#EFEFF1"
+            Foreground="Black"/>
+        </StackPanel>
+        <Border Background="#E8E8E8" Grid.Row="1"/>
+    </Grid>
+</Window>
